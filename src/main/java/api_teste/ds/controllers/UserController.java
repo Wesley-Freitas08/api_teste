@@ -19,6 +19,7 @@ import api_teste.ds.models.User.CreateUser;
 import api_teste.ds.models.User.UpdateUser;
 import api_teste.ds.services.UserService; //Importa a classe UserService do pacote services
 
+
 @RestController //Anotação que indica que essa classe é um controlador REST, capaz de receber requisições HTTP e retornar respostas HTTP
 @RequestMapping ("/user") //Anotação que define o caminho base para todas as requisições mapeadas nesse controlador
 @Validated 
