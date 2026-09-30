@@ -38,7 +38,7 @@ public class TaskController {
 
     @GetMapping("/user/{userId}") // Mapeia GET /task/user/{userId} para listar tarefas de um usuário
     public ResponseEntity<List<Task>> findAllByUserId(@PathVariable Long userId) { // Extrai o userId da URL
-        List<Task> objs = this.taskService.findByUserId(userId); // Busca todas as tarefas daquele usuário
+        List<Task> objs = this.taskService.findALLByUserId(userId); // Busca todas as tarefas daquele usuário
         return ResponseEntity.ok().body(objs); // Retorna HTTP 200 (Sucesso) com a lista de tarefas
     }
 
