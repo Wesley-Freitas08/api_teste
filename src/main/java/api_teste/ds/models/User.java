@@ -11,6 +11,11 @@ import jakarta.persistence.Table; // Especifica o nome da tabela no banco
 import jakarta.validation.constraints.NotBlank; // Garante que o texto não seja nulo e nem vazio/espaços
 import jakarta.validation.constraints.NotNull; // Garante que o valor não seja nulo
 import jakarta.validation.constraints.Size; // Define tamanho mínimo e máximo de caracteres
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList; // Estrutura de lista dinâmica
 import java.util.List; // Interface de listas em Java
@@ -18,6 +23,12 @@ import java.util.Objects; // Métodos utilitários para equals e hashCode
 
 @Entity // Marca a classe como uma entidade gerenciada pelo JPA
 @Table(name = User.TABLE_NAME) // Define o nome da tabela física no banco
+@AllArgsConstructor 
+@NoArgsConstructor 
+@Getter 
+@Setter 
+@EqualsAndHashCode 
+
 public class User {
 
     // =========================================================================
@@ -50,61 +61,5 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Evita loop infinito de recursão na serialização JSON
     private List<Task> tasks = new ArrayList<>(); // Lista de tarefas vinculadas a este usuário
 
-    public User() { // Construtor padrão sem argumentos exigido pelo JPA
-    }
-
-    public User(Long id, String username, String password) { // Construtor com campos para testes ou criação manual
-        this.id = id; // Atribui o ID
-        this.username = username; // Atribui o login
-        this.password = password; // Atribui a senha
-    }
-
-    public Long getId() { // Pega o ID do usuário
-        return id; // Retorna o ID
-    }
-
-    public void setId(Long id) { // Define o ID do usuário
-        this.id = id; // Atribui o novo valor de ID
-    }
-
-    public String getUsername() { // Pega o login do usuário
-        return username; // Retorna o username
-    }
-
-    public void setUsername(String username) { // Define o login do usuário
-        this.username = username; // Atribui o novo login
-    }
-
-    public String getPassword() { // Pega a senha do usuário
-        return password; // Retorna a senha
-    }
-
-    public void setPassword(String password) { // Define a senha do usuário
-        this.password = password; // Atribui a nova senha
-    }
-
-    public List<Task> getTasks() { // Pega a lista de tarefas do usuário
-        return tasks; // Retorna a lista de tarefas
-    }
-
-    public void setTasks(List<Task> tasks) { // Define a lista de tarefas do usuário
-        this.tasks = tasks; // Atribui a nova lista de tarefas
-    }
-
-    @Override
-    public boolean equals(Object obj) { // Compara se dois objetos de usuário são iguais
-        if (this == obj) // Se apontarem para a mesma referência em memória, são iguais
-            return true;
-        if (obj == null || getClass() != obj.getClass()) // Se o outro for nulo ou de classe diferente, não são iguais
-            return false;
-        User other = (User) obj; // Faz o cast seguro do objeto
-        return Objects.equals(this.id, other.id) // Compara a igualdade dos campos ID, username e password
-                && Objects.equals(this.username, other.username)
-                && Objects.equals(this.password, other.password);
-    }
-
-    @Override
-    public int hashCode() { // Gera o código hash numérico para o objeto
-        return Objects.hash(this.id, this.username, this.password); // Baseia o cálculo nos atributos principais
-    }
+  
 }
